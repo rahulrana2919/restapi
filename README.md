@@ -34,7 +34,9 @@ URL: localhost:8080/person
 METHOD: GET,PUT,POST,DELETE
 
 HEADERS:
+
 Authorization: Bearer <<jwt response from 2nd step>>
+
 Content-Type: application/json
 
 BODY( for POST,PUT, DELETE):
