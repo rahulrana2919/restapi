@@ -2,7 +2,7 @@
 Rest API for Person entities using Springboot and Spring Security
 
 Run the project
-1. App
+1. Project need to be imported in intellij and Run using the com.embl.restapi.App file in intellij.
 2. Using REST client e.g postman, hit a POST request at below URL
 URL: localhost:8080/authenticate, METHOD : POST
 Headers:
@@ -13,7 +13,7 @@ Body:
 	"password": "pass"
 }
 
-The you get response like below
+Then you get response like below
 {
     "jwt": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VyIiwiZXhwIjoxNTgwNDY5ODI4LCJpYXQiOjE1ODA0MzM4Mjh9.IVXj2TW9FlvFVlpYxQuUUlnUL7aTDO7fGhNa057sa-k"
 }
@@ -22,10 +22,10 @@ The you get response like below
 all subsequent requests
 URL: localhost:8080/person, METHOD: GET,PUT,POST,DELETE
 Headers:
-Authorization: Bearer <<jwt from above step>>
+Authorization: Bearer <<jwt response from 2nd step>>
 Content-Type: application/json
 Body:
-For Post request:
+Example For Post request:
 {
     "person": [
         {
@@ -49,8 +49,8 @@ For Post request:
     ]
 }
 
-4. To delete all use:
+4. To delete all users:
 URL: localhost:8080/person/all, METHOD: DELETE
 Headers:
-Authorization: Bearer <<jwt from above step>>
+Authorization: Bearer <<jwt response from 2nd step>>
 Content-Type: application/json
