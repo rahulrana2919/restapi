@@ -49,8 +49,8 @@ Example For Post request:
             ]
         },
         {
-            "first_name": "Pooja",
-            "last_name": "Mehne",
+            "first_name": "Rick",
+            "last_name": "Bell",
             "age": "26",
             "favorite_colour": "green",
             "hobby": [
@@ -59,6 +59,11 @@ Example For Post request:
         }
     ]
 }
+
+NOTE: 
+For the POST operation , new person is created only if either of firstname, lastname, age of Person in input is different than the one already stored in DB. 
+
+Also, for the PUT operation , existing person is modified only if firstname, lastname, age of Person in input is matching with the one stored in DB. So, only favorite_colour and hobby is allowed to be modified.
 
 4. To delete all users:
 
