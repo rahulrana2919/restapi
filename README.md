@@ -1,13 +1,13 @@
 # restapi
-Rest API for Person entities using Springboot and Spring Security
+Rest API for Person entities using Springboot and Spring Security(Jwt)
 
 Run the project
 1. Project need to be imported in intellij and Run using the com.embl.restapi.App file in intellij.
 2. Using REST client e.g postman, hit a POST request at below URL
 URL: localhost:8080/authenticate, METHOD : POST
-Headers:
+HEADERS:
 Content-Type: application/json
-Body: 
+BODY: 
 {
 	"username": "user",
 	"password": "pass"
@@ -21,10 +21,10 @@ Then you get response like below
 3. Copy the jwt string from above response and use it as Authorization header in
 all subsequent requests
 URL: localhost:8080/person, METHOD: GET,PUT,POST,DELETE
-Headers:
+HEADERS:
 Authorization: Bearer <<jwt response from 2nd step>>
 Content-Type: application/json
-Body:
+BODY:
 Example For Post request:
 {
     "person": [
@@ -51,6 +51,18 @@ Example For Post request:
 
 4. To delete all users:
 URL: localhost:8080/person/all, METHOD: DELETE
-Headers:
+HEADERS:
 Authorization: Bearer <<jwt response from 2nd step>>
 Content-Type: application/json
+
+5. To create other username/password in step 2, you can create your own users using:
+URL: localhost:8080/users, METHOD: POST ,
+HEADERS:
+Content-Type: application/json
+BODY:
+{
+	"username": "<<new username>>",
+	"password": "<<new password>>"
+}
+	
+Then follow other steps from 2 onwards as mentioned earlier.
