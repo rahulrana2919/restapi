@@ -1,8 +1,11 @@
 # restapi
 Rest API for Person entities using Springboot and Spring Security(Jwt)
 
+Description: SpringBoot has been used to implement rest api for person entities and these are secured using SpringSecurity(Jwt).
+H2 database has been used as in-memory database.
+
 Run the project
-1. Project need to be imported as maven project in intellij and run using the com.embl.restapi.App file in intellij.
+1. Project need to be cloned OR imported as maven project in intellij and run using the main method in com.embl.restapi.App file.
 2. Using REST client e.g postman, hit a POST request at below URL
 
 URL: localhost:8080/authenticate, METHOD : POST
@@ -34,7 +37,7 @@ HEADERS:
 Authorization: Bearer <<jwt response from 2nd step>>
 Content-Type: application/json
 
-BODY:
+BODY( for POST,PUT, DELETE):
 Example For Post request:
 
 {
@@ -65,17 +68,23 @@ For the POST operation , new person is created only if either of firstname, last
 
 Also, for the PUT operation , existing person is modified only if firstname, lastname, age of Person in input is matching with the one stored in DB. So, only favorite_colour and hobby is allowed to be modified.
 
+GET will return all person entitites.
+
 4. To delete all users:
 
 URL: localhost:8080/person/all, METHOD: DELETE
 
 HEADERS:
+
 Authorization: Bearer <<jwt response from 2nd step>>
+
 Content-Type: application/json
 
 5. To create other username/password in step 2, you can create your own users using:
 
-URL: localhost:8080/users, METHOD: POST ,
+URL: localhost:8080/users, 
+
+METHOD: POST ,
 
 HEADERS:
 Content-Type: application/json
