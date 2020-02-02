@@ -7,6 +7,7 @@ import com.embl.restapi.services.UsersService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service public class UsersServiceImpl implements UsersService
@@ -28,5 +29,10 @@ import java.util.Optional;
     @Override public void deleteUser(Users users)
     {
         userRepository.delete(users);
+    }
+
+    @Override public List<Users> getUsers()
+    {
+        return userRepository.findAll();
     }
 }
