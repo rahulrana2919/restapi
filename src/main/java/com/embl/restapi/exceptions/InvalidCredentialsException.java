@@ -1,9 +1,9 @@
 package com.embl.restapi.exceptions;
 
-public class InvalidCredentialsException extends RuntimeException
+public class InvalidCredentialsException extends Exception
 {
-    public InvalidCredentialsException()
+    public InvalidCredentialsException(Exception e)
     {
-        super("Either username or Password is incorrect");
+        super("Either username or Password is incorrect " + e);
     }
 }
