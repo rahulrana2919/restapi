@@ -1,6 +1,14 @@
+/*
+ * 2020.
+ * Author: Rahul Rana
+ */
+
 package com.embl.restapi;
 
+import com.embl.restapi.controller.AuthenticationController;
 import com.embl.restapi.controller.PersonController;
+import com.embl.restapi.dto.AuthenticationRequest;
+import com.embl.restapi.dto.AuthenticationResponse;
 import com.embl.restapi.dto.Person;
 import com.embl.restapi.dto.Persons;
 import lombok.extern.slf4j.Slf4j;
@@ -9,6 +17,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.annotation.Bean;
+import org.springframework.http.ResponseEntity;
 
 import java.util.List;
 import java.util.Objects;
@@ -22,9 +31,20 @@ public class App
         SpringApplication.run(App.class, args);
     }
 
-    @Bean public CommandLineRunner demo(PersonController personController)
+    @Bean public CommandLineRunner demo(PersonController personController,
+            AuthenticationController authenticationController)
     {
         return (args) -> {
+            // generate awt
+            log.info("");
+            log.info("Generate awt token using user credentials");
+            ResponseEntity<AuthenticationResponse> responseEntity = authenticationController
+                    .createAuthenticationToken(
+                            new AuthenticationRequest("admin", "pass"));
+            log.info("jwt token: " + Objects.requireNonNull(responseEntity.getBody())
+                    .toString());
+            log.info("--------------------------------");
+
             // save a few persons
             Person person1 = new Person("Chloe", "O'Brian", "56", "orange",
                     List.of("chess"));
@@ -44,8 +64,8 @@ public class App
 
             // update a person
             log.info("Update the person with first_name = Chloe");
-            Person updatedPerson1 = new Person("Chloe", "O'Brian", "56",
-                    "red", List.of("chess", "carrom"));
+            Person updatedPerson1 = new Person("Chloe", "O'Brian", "56", "red",
+                    List.of("chess", "carrom"));
             personController.modifyPerson(new Persons(List.of(updatedPerson1)));
             log.info("--------------------------------");
             // fetch all customers

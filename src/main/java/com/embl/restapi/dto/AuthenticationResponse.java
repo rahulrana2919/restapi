@@ -1,9 +1,14 @@
+/*
+ * 2020.
+ * Author: Rahul Rana
+ */
+
 package com.embl.restapi.dto;
 
-import lombok.Getter;
+import lombok.Data;
 import lombok.RequiredArgsConstructor;
 
-@Getter
+@Data
 @RequiredArgsConstructor
 public class AuthenticationResponse
 {

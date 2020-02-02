@@ -1,3 +1,8 @@
+/*
+ * 2020.
+ * Author: Rahul Rana
+ */
+
 package com.embl.restapi.services.impl;
 
 import com.embl.restapi.dto.Person;
@@ -17,9 +22,9 @@ import static org.mockito.MockitoAnnotations.initMocks;
 
 class PersonServiceImplTest
 {
-    @InjectMocks PersonServiceImpl personService;
-    @Mock PersonRepository personRepository;
-    Persons persons;
+    @InjectMocks private PersonServiceImpl personService;
+    @Mock private PersonRepository personRepository;
+    private Persons persons;
 
     @BeforeEach void setUp()
     {

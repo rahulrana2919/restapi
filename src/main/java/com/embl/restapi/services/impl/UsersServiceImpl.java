@@ -1,3 +1,8 @@
+/*
+ * 2020.
+ * Author: Rahul Rana
+ */
+
 package com.embl.restapi.services.impl;
 
 import com.embl.restapi.dto.Users;
@@ -31,7 +36,8 @@ import java.util.Optional;
         userRepository.delete(users);
     }
 
-    @Override public List<Users> getUsers()
+    @Override
+    public List<Users> getUsers()
     {
         return userRepository.findAll();
     }

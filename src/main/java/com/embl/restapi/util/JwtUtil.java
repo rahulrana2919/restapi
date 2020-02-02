@@ -1,8 +1,17 @@
+/*
+ * 2020.
+ * Author: Rahul Rana
+ */
+
 package com.embl.restapi.util;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
@@ -11,10 +20,19 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;
 
-@Service public class JwtUtil
+@Service
+@Slf4j
+public class JwtUtil
 {
-    //to be stored in DB for real application
-    private String SECRET_KEY = "secret";
+    @Autowired private JdbcTemplate jdbcTemplate;
+
+    @Cacheable(value = "secretCache", condition = "#secret!=null")
+    private String getSecretKey()
+    {
+        log.debug("Fetching key from database");
+        return jdbcTemplate
+                .queryForObject("Select secret_key from secret", String.class);
+    }
 
     public String extractUsername(String token)
     {
@@ -34,7 +52,7 @@ import java.util.function.Function;
 
     private Claims extractAllClaims(String token)
     {
-        return Jwts.parser().setSigningKey(SECRET_KEY).parseClaimsJws(token)
+        return Jwts.parser().setSigningKey(getSecretKey()).parseClaimsJws(token)
                 .getBody();
     }
 
@@ -56,7 +74,7 @@ import java.util.function.Function;
                 .setIssuedAt(new Date(System.currentTimeMillis()))
                 .setExpiration(new Date(
                         System.currentTimeMillis() + 1000 * 60 * 60 * 10))
-                .signWith(SignatureAlgorithm.HS256, SECRET_KEY).compact();
+                .signWith(SignatureAlgorithm.HS256, getSecretKey()).compact();
     }
 
     public Boolean validateToken(String token, UserDetails userDetails)
