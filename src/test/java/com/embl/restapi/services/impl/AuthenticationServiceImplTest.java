@@ -3,19 +3,15 @@
  * Author: Rahul Rana
  */
 
-package com.embl.restapi.controller;
+package com.embl.restapi.services.impl;
 
 import com.embl.restapi.dto.AuthenticationRequest;
-import com.embl.restapi.dto.AuthenticationResponse;
 import com.embl.restapi.exceptions.InvalidCredentialsException;
-import com.embl.restapi.services.impl.MyUserDetailsService;
 import com.embl.restapi.util.JwtUtil;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.userdetails.User;
@@ -28,11 +24,11 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 import static org.mockito.MockitoAnnotations.initMocks;
 
-class AuthenticationControllerTest
+class AuthenticationServiceImplTest
 {
     public static final String USERNAME = "username";
     public static final String PASSWORD = "password";
-    @InjectMocks private AuthenticationController authenticationController;
+    @InjectMocks private AuthenticationServiceImpl authenticationService;
     private AuthenticationRequest authenticationRequest;
 
     @Mock private AuthenticationManager authenticationManager;
@@ -54,11 +50,9 @@ class AuthenticationControllerTest
 
     @Test void createAuthenticationToken() throws InvalidCredentialsException
     {
-        ResponseEntity<AuthenticationResponse> authenticationToken = authenticationController
-                .createAuthenticationToken(authenticationRequest);
-        assertEquals(HttpStatus.OK, authenticationToken.getStatusCode());
-        assertEquals(new AuthenticationResponse(JWT),
-                authenticationToken.getBody());
+        String authenticationToken = authenticationService
+                .generateJwtToken(authenticationRequest);
+        assertEquals(JWT, authenticationToken);
     }
 
     @Test void createAuthenticationToken_Exception()
@@ -67,8 +61,8 @@ class AuthenticationControllerTest
                 .thenThrow(BadCredentialsException.class);
         try
         {
-            authenticationController
-                    .createAuthenticationToken(authenticationRequest);
+            authenticationService
+                    .generateJwtToken(authenticationRequest);
             fail("Should throw exception");
         }
         catch (Exception e)

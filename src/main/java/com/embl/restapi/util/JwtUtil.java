@@ -26,8 +26,8 @@ public class JwtUtil
 {
     @Autowired private JdbcTemplate jdbcTemplate;
 
-    @Cacheable(value = "secretCache", condition = "#secret!=null")
-    private String getSecretKey()
+    @Cacheable("secretCache")
+    private String getSecretKeyFromDB()
     {
         log.debug("Fetching key from database");
         return jdbcTemplate
@@ -52,7 +52,7 @@ public class JwtUtil
 
     private Claims extractAllClaims(String token)
     {
-        return Jwts.parser().setSigningKey(getSecretKey()).parseClaimsJws(token)
+        return Jwts.parser().setSigningKey(getSecretKeyFromDB()).parseClaimsJws(token)
                 .getBody();
     }
 
@@ -74,7 +74,7 @@ public class JwtUtil
                 .setIssuedAt(new Date(System.currentTimeMillis()))
                 .setExpiration(new Date(
                         System.currentTimeMillis() + 1000 * 60 * 60 * 10))
-                .signWith(SignatureAlgorithm.HS256, getSecretKey()).compact();
+                .signWith(SignatureAlgorithm.HS256, getSecretKeyFromDB()).compact();
     }
 
     public Boolean validateToken(String token, UserDetails userDetails)

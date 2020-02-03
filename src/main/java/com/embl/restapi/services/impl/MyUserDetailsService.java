@@ -23,7 +23,6 @@ import java.util.Optional;
     @Autowired private UserRepository userRepository;
 
     @Override
-    @Cacheable(value = "usersCache", condition = "#username!=null")
     public UserDetails loadUserByUsername(String username)
             throws UsernameNotFoundException
     {
