@@ -26,7 +26,6 @@ public class JwtUtil
 {
     @Autowired private JdbcTemplate jdbcTemplate;
 
-    @Cacheable("secretCache")
     private String getSecretKeyFromDB()
     {
         log.debug("Fetching key from database");
