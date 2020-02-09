@@ -5,7 +5,7 @@ Description: SpringBoot has been used to implement rest api for person entities 
 H2 database has been used as in-memory database.
 
 Run the project
-1. Project need to be cloned OR imported as maven project in intellij and run using the main method in com.embl.restapi.App file.
+1. Project need to be cloned OR imported as maven project in intellij and run using the main method in com.rahrana.restapi.App file.
 2. Using REST client e.g postman, hit a POST request at below URL
 
 URL: localhost:8080/authenticate, METHOD : POST

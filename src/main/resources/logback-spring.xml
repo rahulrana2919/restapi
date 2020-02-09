@@ -38,8 +38,8 @@
         <appender-ref ref="Console" />
     </root>
 
-    <!-- LOG "com.embl*" at TRACE level -->
-    <logger name="com.embl.restapi" level="info" additivity="false">
+    <!-- LOG "com.rahrana*" at TRACE level -->
+    <logger name="com.rahrana.restapi" level="info" additivity="false">
         <appender-ref ref="RollingFile" />
         <appender-ref ref="Console" />
     </logger>
