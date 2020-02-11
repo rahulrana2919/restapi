@@ -6,6 +6,7 @@
 package com.rahrana.restapi.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -27,13 +28,18 @@ public class Person
     @GeneratedValue(strategy = GenerationType.AUTO)
     @EqualsAndHashCode.Exclude
     private int id;
+    @ApiModelProperty(notes = "person's first name")
     private String first_name;
+    @ApiModelProperty(notes = "person's last name")
     private String last_name;
+    @ApiModelProperty(notes = "person's age")
     private String age;
     @EqualsAndHashCode.Exclude
+    @ApiModelProperty(notes = "person's favorite color")
     private String favorite_colour;
     @ElementCollection (fetch = FetchType.EAGER)
     @EqualsAndHashCode.Exclude
+    @ApiModelProperty(notes = "person's hobbies")
     private List<String> hobby;
 
     public Person(String first_name, String last_name, String age,

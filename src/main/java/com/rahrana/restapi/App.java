@@ -41,8 +41,8 @@ public class App
             ResponseEntity<AuthenticationResponse> responseEntity = authenticationController
                     .createAuthenticationToken(
                             new AuthenticationRequest("admin", "pass"));
-            log.info("jwt token: " + Objects.requireNonNull(responseEntity.getBody())
-                    .toString());
+            log.info("jwt token: " + Objects
+                    .requireNonNull(responseEntity.getBody()).toString());
             log.info("--------------------------------");
 
             // save a few persons
