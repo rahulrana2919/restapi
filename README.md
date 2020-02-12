@@ -6,7 +6,14 @@ H2 database has been used as in-memory database.
 
 Run the project
 1. Project need to be cloned OR imported as maven project in intellij and run using the main method in com.rahrana.restapi.App file.
-2. Using REST client e.g postman, hit a POST request at below URL
+2. Using REST client e.g postman, hit the requests at below URL
+
+OR
+
+Find the API documentation at swagger UI: http://localhost:8080/swagger-ui.html
+. And try below requests from there.
+
+--------------------------------------------------------------------------------
 
 URL: localhost:8080/authenticate, METHOD : POST
 
